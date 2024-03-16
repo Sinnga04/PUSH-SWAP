@@ -1,0 +1,16 @@
+{
+  "files.associations": {
+    "push_swap.h": "c",
+    "memory": "c",
+    "utility": "c",
+    "__config": "c",
+    "__tuple": "c",
+    "chrono": "c",
+    "ios": "c",
+    "string": "c",
+    "vector": "c",
+    "stdbool.h": "c",
+    "libft.h": "c",
+    "iterator": "c"
+  }
+}

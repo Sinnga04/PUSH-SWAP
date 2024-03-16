@@ -1,0 +1,4 @@
+// how will i move the numbers to the stack B;
+
+// cheapest ->>> 
+// (cost of b) + (cost of b->target) -->> lowest sum is the cheapest
