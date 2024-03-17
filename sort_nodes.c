@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:09:05 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/16 19:38:00 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/17 13:21:43 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,105 +15,109 @@
 // t_list	*smallestnumber(t_list *stacka);
 t_list *most_cheapest(t_list *stackb);
 
-void	easy_move_b(t_list *stackb)
+void	easy_move_b(t_list **stackb)
 {
-	if (most_cheapest(stackb)->above_median)
+	t_list *cheap;
+
+	cheap = most_cheapest(*stackb);
+	if (cheap->above_median)
 	{
-		while (most_cheapest(stackb) != stackb)
+		while (cheap != *stackb)
 		{
-			printf("most_cheapest %d\n", most_cheapest(stackb)->content);
-			rrb(&stackb);
+			rb(stackb);
 		}
 	}
-	else if (!(most_cheapest(stackb)->above_median))
+	else if (!(cheap->above_median))
 	{
-		while (most_cheapest(stackb) != stackb)
+		while (cheap != *stackb)
 		{
-			printf("most_cheapest %d\n", most_cheapest(stackb)->content);
-			rb(&stackb);
+			rrb(stackb);
 		}
 	}
 }
 
-void	easy_move_a(t_list *stacka)
+void	easy_move_a(t_list **stacka, t_list *node)
 {
-
-	if (most_cheapest(stacka)->above_median)
+	if (node->above_median)
 	{
-		while (most_cheapest(stacka) != stacka)
+		while (node != *stacka)
 		{
-			printf("most_cheapest %d\n", most_cheapest(stacka)->content);
-			rra(&stacka);
+			ra(stacka);
 		}
 	}
-	else if (!(most_cheapest(stacka)->above_median))
+	else if (!(node->above_median))
 	{
-		while (most_cheapest(stacka) != stacka)
+		while (node != *stacka)
 		{
-			printf("most_cheapest %d\n", most_cheapest(stacka)->content);
-			ra(&stacka);
+			rra(stacka);
 		}
 	}
-}
-void	rr_help(t_list **stacka, t_list **stackb)
-{
-	ra(stacka);
-	rb(stackb);
 }
 void	rr(t_list **stacka, t_list **stackb)
 {
-	t_list	*current_a;
-	t_list	*current_b;
-	t_list	*cheapest;
-
-	current_a = *stacka;
-	current_b = *stackb;
-	cheapest = most_cheapest(*stackb);
-	while (current_b != cheapest && current_a != cheapest->target)
-		rr_help(stacka, stackb);
+	ra(stacka);
+	rb(stackb);
 	indexing(stacka);
 	indexing(stackb);
 }
 
-void	rrr_help(t_list	**stacka, t_list **stackb)
-{
-	rra(stacka);
-	rrb(stackb);
-}
 void	rrr(t_list **stacka, t_list **stackb)
 {
-	t_list	*current_a;
-	t_list	*current_b;
-	t_list	*cheapest;
 
-	current_a = *stacka;
-	current_b = *stackb;
-	cheapest = most_cheapest(*stackb);
-	while (current_b != cheapest && current_a != cheapest->target)
-		rrr_help(stacka, stackb);
+	rra(stacka);
+	rrb(stackb);
 	indexing(stacka);
 	indexing(stackb);
+}
+
+void  small_to_top(t_list **stacka)
+{
+	t_list *small = smallestnumber(*stacka);
+
+		if (small->above_median)
+			while (*stacka != small)
+				rra(stacka);
+		else
+			while (*stacka != small)	
+				ra(stacka);
 }
 
 void	move_nodes(t_list **stacka, t_list **stackb)
 {
 	t_list	*cheapest;
-
+	t_list	*small;
+	t_list	*biggest;
 		cheapest = most_cheapest(*stackb);
 		while (cheapest != *stackb && cheapest->target != *stacka)
 		{
 			if (cheapest->above_median && cheapest->target->above_median)
 			{
-				rr(stacka, stackb);
+				ra(stacka);
+				rb(stacka);
 			}
 			else if (!(cheapest->above_median)
 				&& !(cheapest->target->above_median))
 			{
-				rrr(stacka, stackb);
+				rra(stacka);
+				rrb(stacka);
 			}
 		}
-		easy_move_a(*stacka);
-		easy_move_b(*stackb);
+		easy_move_a(stacka, cheapest->target);
+		easy_move_b(stackb);
 		pa(stacka, stackb);
+		// small = smallestnumber(*stacka);
+		// printf("the smallest number is %d\n", small->content);
+		// if (small->above_median)
+		// 	while (*stacka != small)
+		// 		rra(stacka);
+		// else
+		// 	while (*stacka != small)	
+		// 		ra(stacka);
+		// t_list *big = biggestnumber(*stacka);
+		// if (big->above_median)
+		// 		ra(stacka);
+		// else
+		// 		rra(stacka);
 		
 }
+

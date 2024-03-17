@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:46:54 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/16 17:21:23 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/17 12:20:49 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,5 @@ int		empty(t_list *stack);
 int		count(t_list *stacka);
 int		above_median(t_list *stack);
 void	move_nodes(t_list **stacka, t_list **stackb);
+void	sortAndCheckConditions(t_list **stackA);
+void  small_to_top(t_list **stacka);

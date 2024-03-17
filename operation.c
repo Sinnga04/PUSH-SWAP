@@ -6,63 +6,12 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:23:44 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/15 09:12:39 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/17 11:36:13 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// void sort2num(Stack *stackA) {
-//     if (stackA->top != NULL && stackA->top->next != NULL) {
-//         int first = stackA->top->data;
-//         int second = stackA->top->next->data;
-//         if (first < second)
-//             sa(stackA);
-//     }
-// }
-
-// int ft_lstsize(t_list *lst);
-
-// void    helposition(Stack *stackA, Stack *stackB)
-// {
-// int largestPosition = helperfive(stackA);
-// if (largestPosition == 0) {
-//     pb(stackA, stackB);
-// } else if (largestPosition == 1) {
-//     sa(stackA);
-//     pb(stackA, stackB);
-// } else if (largestPosition == 2) {
-//     ra(stackA);
-//     ra(stackA);
-//     pb(stackA, stackB);
-// } else if (largestPosition == 3) {
-//     ra(stackA);
-//     ra(stackA);
-//     ra(stackA);
-//     pb(stackA, stackB);
-// } else if (largestPosition == ft_lstsize((t_list *)stackA) - 1) {
-//     rra(stackA);
-//     pb(stackA, stackB);
-// }
-// }
-
-// int    helperfive(Stack *stackA)
-// {
-// int largest = 0;
-// Node *current = stackA->top;
-// int position = 0;
-// int largestPosition = 0;
-
-// while (current != NULL) {
-//     if (current->data > largest) {
-//         largest = current->data;
-//         largestPosition = position;
-//     }
-//     current = current->next;
-//     position++;
-//     }
-//     return (position);
-// }
 // void largestmove(Stack *stackA, Stack *stackB)
 // {
 //    int largest = findLargestNumber(stackA);
@@ -136,24 +85,7 @@
 //         pa(stackA, stackB);
 //         pa(stackA, stackB);
 // }
-// void mechturk(Stack *stackA, Stack *stackB) {
-//     int max = findLargestNumber(stackA);
-//     int min = findSmallestNumber(stackA);
-//     printf("\nole%d\n", max);
-//     printf("\nnole%d\n", min);
-//     Node* current = stackA->top;
-//     while (current != NULL) {
-//         if (current->data < max ) {
-//             // pa(stackA, stackB);
-//             // printf("\nthis is %d\n", current->data);
-//             pb(stackA, stackB);
-//             if (isEmpty(stackA)) {
-//                 break; 
-//             }
-//         }
-//         current = current->next;
-//     }
-// }
+
 
 t_list	*ft_lstnew(int content)
 {
@@ -286,70 +218,3 @@ int ft_isduplicate(t_list *stack)
 	}
 	return (0);
 }
-
-// int	count(t_list *stack)
-// {
-// 	int		i;
-// 	t_list	*current;
-
-// 	i = 0;
-// 	current = stack;
-// 	while (current != NULL)
-// 	{
-// 		i++;
-// 		current = current->next;
-// 	}
-// 	return (i);
-// }
-
-int	main(int argc, char **argv)
-{
-	(void)argc;
-	t_list	*stacka;
-	int		i;
-
-	stacka = NULL;
-	//t_list *stackB = NULL;
-	if (ft_check_error1(argv) == 1)
-	{
-		write (2, "Error1\n", 7);
-		return (1);
-	}
-	stack_init(&stacka, argv);
-	ft_print_stack(stacka);
-	i = count(stacka);
-	if (i == 2)
-		printf("1");
-	else
-		printf("2");
-}
-
-// int main(int argc, char *argv[]) {
-//     Stack stackA;
-//     initializeStack(&stackA);
-//     Stack stackB;
-//     initializeStack(&stackB);
-//     //int num = 0;
-//     if (check(argc, argv, &stackA) == EXIT_FAILURE)
-//         exit(EXIT_FAILURE);
-//     //push(&stackA, num);
-//     // printf("Initial stack contents:\n");
-//     displayStack(&stackA);
-//     if (argc == 3)
-//         sort2num(&stackA);
-//     else if (argc ==  4)
-//         sortAndCheckConditions(&stackA);
-//     else if (argc ==  5)
-//             sortfour(&stackA, &stackB);
-//         else if (argc == 6) {
-//             sortfivenumbers(&stackA, &stackB);
-//         }
-//         else if (argc == 11)
-//         {  
-//             printf("ok");
-//             mechturk(&stackA, &stackB);
-//         }
-//         //printf("\nFinal stack contents:\n");
-//         displayStack(&stackA);
-//         return EXIT_SUCCESS;
-// }

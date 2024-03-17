@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:00:14 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/16 19:49:46 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:19:21 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,17 @@ void	target_check(t_list **stacka, t_list **stackb)
 	{
 		current_a = *stacka;
 		delta = current_a->content - current_b->content;
+		current_b->target = current_a;
 		while (current_a)
 		{
 			if ((current_b)->content > big->content)
+			{
 				current_b->target = smallestnumber(*stacka);
-			else if (current_b->content < current_a->content)
+			}
+			else if (current_a->content > current_b->content)
 			{
 				if (delta >= (current_a->content - current_b->content))
-				{	
+				{
 					delta = current_a->content - current_b->content;
 					current_b->target = current_a;
 				}
@@ -79,6 +82,35 @@ void	target_check(t_list **stacka, t_list **stackb)
 	}
 }
 
+
+//  void	target_check(t_list **stacka, t_list **stackb)
+//  {
+// 	t_list	*current_b;
+// 	long 	best_match_index;
+// 	t_list	*current_a;
+// 	int		delta;
+
+// 	current_b = *stackb;
+// 	best_match_index = biggestnumber(*stacka)->content;
+// 	current_a = *stacka;
+// 	while (current_a)
+// 	{
+// 			if(current_a->content > current_b->content && current_a->content < best_match_index)
+// 				{
+// 					best_match_index = current_a->content;
+// 					current_b->target = current_a;
+// 				}
+// 			current_a = current_a->next;
+// 	}
+// 	if (best_match_index == biggestnumber(*stacka)->content)
+// 		current_b->target = smallestnumber(*stacka);
+// 	// else 
+// 	// 	current_b->target = current_b->target;
+// 	current_b = current_b->next;
+//  }
+
+
+ 
 int		count(t_list *stack);
 
 void	cheapest(t_list **stackb)
@@ -89,19 +121,21 @@ void	cheapest(t_list **stackb)
 	while (current_b != NULL)
 	{
 		current_b->cheapest = current_b->target->cost + current_b->cost;
-		printf("%d and his cost %d\n",current_b->content,  current_b->cheapest);
+		printf("%d and his cost %d\n", current_b->content, current_b->cheapest);
 		current_b = current_b->next;
 	}
 }
 
-t_list *most_cheapest(t_list *stackb)
+t_list	*most_cheapest(t_list *stackb)
 {
-	t_list *cheapest;
-	int sum = stackb->cheapest;
+	t_list	*cheapest;
+	int		sum;
+
+	sum = stackb->cheapest;
 	cheapest = stackb;
 	while (stackb)
 	{
-		if(stackb->cheapest < sum)
+		if (stackb->cheapest < sum)
 		{
 			cheapest = stackb;
 			sum = cheapest->cheapest;
@@ -125,100 +159,111 @@ int	pop(t_list **stack)
 	return (value);
 }
 
-void sb(t_list **stackb)
+void	sb(t_list **stackb)
 {
-    t_list *top = *stackb;
-    if (top == NULL || top->next == NULL)
-        return;
+	t_list	*top;
+	int		temp;
 
-    int temp = top->content;
-    top->content = top->next->content;
-    top->next->content = temp;
-    printf("sb\n");
+	top = *stackb;
+	if (top == NULL || top->next == NULL)
+		return ;
+	temp = top->content;
+	top->content = top->next->content;
+	top->next->content = temp;
+	printf("sb\n");
 	indexing(stackb);
 }
-void sa(t_list **stacka)
+void	sa(t_list **stacka)
 {
-    t_list *current = *stacka;
+	t_list	*current;
+	int		temp;
 
-    if (current == NULL || current->next == NULL)
-        return;
-    int temp = current->content;
-    current->content = current->next->content;
-    current->next->content = temp;
-    printf("sa\n");
+	current = *stacka;
+	if (current == NULL || current->next == NULL)
+		return ;
+	temp = current->content;
+	current->content = current->next->content;
+	current->next->content = temp;
+	printf("sa\n");
 	indexing(stacka);
 }
 
 void	ra(t_list **stacka)
 {
+	t_list	*last;
 
-    t_list *current = *stacka;
-	t_list *last = NULL;
-	while (current->next != NULL)
+	if (*stacka == NULL || (*stacka)->next == NULL)
 	{
-		last = current;
-		current = current->next; 
+		return ;
 	}
-	last->next = NULL;
-    current->next = *stacka;
-    *stacka = current;
-
-	printf("rrb\n");
+	last = *stacka;
+	while (last->next != NULL)
+	{
+		last = last->next;
+	}
+	last->next = *stacka;
+	*stacka = (*stacka)->next;
+	last->next->next = NULL;
 	indexing(stacka);
 }
 
 void	rb(t_list **stackb)
 {
+	t_list	*current;
+	t_list	*last;
 
-    t_list *current = *stackb;
-	t_list *last = NULL;
+	current = *stackb;
+	last = NULL;
 	while (current->next != NULL)
 	{
 		last = current;
-		current = current->next; 
+		current = current->next;
 	}
 	last->next = NULL;
-    current->next = *stackb;
-    *stackb = current;
-	printf("rrb\n");
+	current->next = *stackb;
+	*stackb = current;
 	indexing(stackb);
 }
 
 void	rrb(t_list **stackb)
 {
-    t_list *current = *stackb;
-	t_list *last = NULL;
-	
- 	while (current->next != NULL) 
- 	{
-    last = current;
-    current = current->next;
- 	}
+	t_list	*current;
+	t_list	*last;
 
+	current = *stackb;
+	last = NULL;
+	if (*stackb == NULL || (*stackb)->next == NULL)
+		return ;
+	while (current->next != NULL)
+	{
+		last = current;
+		current = current->next;
+	}
 	last->next = NULL;
-    current->next = *stackb;
-	*stackb = current; 
-	printf("rrb\n");
+	current->next = *stackb;
+	*stackb = current;
 	indexing(stackb);
 }
 
 void	rra(t_list **stacka)
 {
-    t_list *current = *stacka;
-	t_list *last = NULL;
-	
- 	while (current->next != NULL) 
- 	{
-    last = current;
-    current = current->next;
- 	}
+	t_list	*current;
+	t_list	*last;
 
+	current = *stacka;
+	last = NULL;
+	if (*stacka == NULL || (*stacka)->next == NULL)
+		return ;
+	while (current->next != NULL)
+	{
+		last = current;
+		current = current->next;
+	}
 	last->next = NULL;
-    current->next = *stacka;
-	*stacka = current; 
-	printf("rrb\n");
-	indexing(stacka);
+	current->next = *stacka;
+	*stacka = current;
+	// printf("rrb\n");
+	// indexing(stacka);
 }
 void	pa(t_list **stacka, t_list **stackb)
 {
@@ -249,144 +294,41 @@ void	displaystack(t_list *stack)
 	}
 }
 
-void displaytarget(t_list *stack)
+void	displaytarget(t_list *stack)
 {
 	while (stack)
 	{
-		printf("%d his target is %d\n",stack->content,  stack->target->content);
+		printf("%d his target is %d\n", stack->content, stack->target->content);
 		stack = stack->next;
 	}
 }
 
 void	move_nodes(t_list **stacka, t_list **stackb);
- void	easy_move_a(t_list *stacka);
-// int main() {
-//     t_list *stacka = NULL;
-// 	t_list *stackb = NULL;
-	
-// 	push(&stackb, 3);
-// 	push(&stackb, 41);
-// 	push(&stackb, 15);
-
-// 	push(&stacka, 4);
-// 	push(&stacka, 19);
-// 	indexing(&stackb);
-// 	median(&stackb);
-// 	cost(&stackb);
-// 	target_check(&stacka, &stackb);
-// 	move_nodes(&stacka, &stackb);
-// 	move_nodes(&stacka, &stackb);
-// 	move_nodes(&stacka, &stackb);
-//  	displaystack(stackb);
-// 	displaystack(stacka);
-// 	easy_move_a(stacka);
-//     return 0;
-// }
-
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// // // Function to initialize the stacks with test data
-// void initialize_stacks(t_list **stacka, t_list **stackb)
-// {
-//     // Add some test data to stacka and stackb
-//     push(stacka, 10);
-//     push(stacka, 20);
-//     push(stacka, 30);
-
-//     push(stackb, 5);
-//     push(stackb, 15);
-//     push(stackb, 25);
-// }
-
-// // Function to test the move_nodes function
-// void test_move_nodes()
-// {
-//     // Initialize stacks
-//     t_list *stacka = NULL;
-//     t_list *stackb = NULL;
-//     initialize_stacks(&stacka, &stackb);
-
-//     // Print initial state of stacks
-//     printf("Initial state of stack A: ");
-//     displaystack(stacka);
-//     printf("Initial state of stack B: ");
-//     displaystack(stackb);
-// 	init_stack(&stacka, &stackb);
-// 	displaytarget(stackb);
-//     // Call the function to be tested
-//     move_nodes(&stacka, &stackb);
-//     move_nodes(&stacka, &stackb);
-
-//     // Print final state of stacks
-//     printf("Final state of stack A: ");
-//     displaystack(stacka);
-//     printf("Final state of stack B: ");
-//     displaystack(stackb);
-// }
-
-// int main()
-// {
-//     // Test the move_nodes function
-//     test_move_nodes();
-
-//     return 0;
-// }
-
-// int main(void) {
-//     // Initialize sample stacka and stackb
-//     t_list *stacka = NULL;
-//     t_list *stackb = NULL;
-
-//     // Add some elements to stacka and stackb
-//     // Example: Push 1, 2, 3 to stacka; Push 4, 5, 6 to stackb
-//     push(&stacka, 1);
-//     push(&stacka, 2);
-//     push(&stacka, 3);
-//     push(&stackb, 4);
-//     push(&stackb, 5);
-//     push(&stackb, 6);
-
-//     // Print initial state of stacks
-//     printf("Initial state of stack A: ");
-//     displaystack(stacka);
-//     printf("Initial state of stack B: ");
-//     displaystack(stackb);
-
-//     // Perform the rr operation
-//     rr(&stacka, &stackb);
-
-//     // Print final state of stacks after rr operation
-//     printf("Final state of stack A after rr operation: ");
-//     displaystack(stacka);
-//     printf("Final state of stack B after rr operation: ");
-//     displaystack(stackb);
-// 	return (0);
-// }
-
-
-
-int main(void) 
+void	easy_move_a(t_list *stacka);
+int	main(void)
 {
+	t_list	*stacka;
+	t_list	*stackb;
 
-    t_list *stacka = NULL;
-    t_list *stackb = NULL;
-
-
-    push(&stacka, 23);
-	push(&stacka, 11);
-	push(&stacka, 53);
+	stacka = NULL;
+	stackb = NULL;
+	push(&stacka, 32);
+	push(&stacka, 5);
+	push(&stacka, 7);
+	// push(&stacka, 19);
 	
-    push(&stackb, 3);
-    push(&stackb, 13);
+	// push(&stackb, 17);
+	push(&stackb, 2);
+	push(&stackb, 18);
 
-	init_stack(&stacka, &stackb);
-
-    displaystack(stacka);
-	printf("ok\n");
-	move_nodes(&stacka, &stackb);
-    displaystack(stacka);
+	while (stackb)
+	{
+		init_stack(&stacka, &stackb);
+		printf("%d and his target %d\n", stackb->content,
+			stackb->target->content);
+		stackb = stackb->next;
+	}
+	// easy_move_a(stacka);
+	// displaystack(stacka);
 	return (0);
 }
-
-// smallest above median check karna hai !!!

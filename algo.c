@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:38:15 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/16 17:10:46 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/17 13:10:47 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ void	indexing(t_list **stack)
 	int		i;
 	t_list	*current;
 
-	i = 0;
 	current = *stack;
-	while (current)
+	i = 0;
+	while (*stack)
 	{
-		current->index = i++;
-		current = current->next;
+		(*stack)->index = i++;
+		*stack = (*stack)->next;
 	}
+	*stack = current; 
 }
 
 void	median(t_list **stack)
@@ -69,7 +70,6 @@ void	cost(t_list **stack)
 		if (current->above_median)
 		{
 			current->cost = current->index;
-			printf("%d the current cost is %d\n",current->content, current->cost);
 		}
 		else
 			current->cost = size - current->index;
@@ -87,41 +87,3 @@ void	init_stack(t_list **stacka, t_list **stackb)
 	cost(stackb);
 	target_check(stacka, stackb);
 }
-
-// int	main(void)
-// {
-// 	t_list	*stacka;
-// 	t_list	*stackb;
-
-// 	stacka = NULL;
-// 	stackb = NULL;
-// 	push(&stacka, 4);
-// 	push(&stacka, 25);
-// 	push(&stacka, 13);
-	
-// 	push(&stackb, 1);
-// 	push(&stackb, 2);
-// 	push(&stackb, 3);
-// 	push(&stackb, 11);
-// 	push(&stackb, 32);
-// 	push(&stackb, 23);
-// 	// int i = count(stackA);
-// 	// printf("%d", i);
-// 	// indexing(&stackB);
-// 	//  indexing(&stackB);
-// 	// median(&stackB);
-// 	// init_stack(&stacka, &stackb);
-	
-	
-// 	// check_cost_try(&stackB);
-// 	printf("kamal bvas\n");
-// 	displaystack(&stackb);
-// 	//targets(&stackA &stackB);
-// 	// int i = indexingB(stackB);
-// 	// int a = count(stackA);
-// 	// int j = check_cost(stackA, 4);
-// 	// // printf("this is %d anf B is ..%d and oooo ii ...%d or ignvkn", k, i, a
-// 	// 	/ 2);
-// 	// printf("\n%d\n", j);
-// 	return (0);
-// }

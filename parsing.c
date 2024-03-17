@@ -6,25 +6,12 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:09:12 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/15 10:15:55 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/17 11:36:28 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// int	ft_isduplicate(int num, t_list *stack)
-// {
-// 	t_list	*current;
-
-// 	current = stack;
-// 	while (current != NULL)
-// 	{
-// 		if (current->content == num)
-// 			return (1);
-// 		current = current->next;
-// 	}
-// 	return (0);
-// }
 
 int	ft_atoi(const char *str)
 {
@@ -67,19 +54,5 @@ int	above_median(t_list *stack)
 	int	i;
 
 	i = count(stack) / 2;
-	// printf("%d\n", i);
 	return (i);
 }
-
-// int main(void)
-// {
-// 	t_list *stacka = NULL;
-// 		t_list *stackb = NULL;
-// 	push(&stacka, 1);
-// 	push(&stacka, 132);
-// 	push(&stacka, 11);
-// 	push(&stacka, 123);
-// 	push(&stacka, 42341);
-// 	push(&stacka, 1325);
-// 	above_median(stackb);
-// }
