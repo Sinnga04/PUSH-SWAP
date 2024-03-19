@@ -6,12 +6,11 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:09:12 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/17 11:36:28 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/17 23:47:27 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 int	ft_atoi(const char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:46:54 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/17 12:20:49 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:53:02 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ typedef struct s_list
 	struct s_list	*next;
 }			t_list;
 
-typedef struct Stack
+typedef struct s_Stack
 {
-	// int     cheapest;
+	int		cheapest;
 	t_list	*stacka;
 	t_list	*stackb;
-}		Stack;
+}		t_Stack;
 
 t_list	*smallestnumber(t_list *stackA);
 t_list	*biggestnumber(t_list *stackA);
@@ -46,9 +46,11 @@ void	indexing(t_list **stack);
 void	median(t_list **stack);
 int		count(t_list *stack);
 void	cost(t_list **stack);
+// void	cost(t_list *stacka, t_list *stackb);
 void	init_stack(t_list **stacka, t_list **stackb);
 void	sb(t_list **stackb);
 void	ra(t_list **stacka);
+void	get_all_targets(t_list **stacka, t_list **stackb);
 void	rb(t_list **stackb);
 void	rr(t_list **stacka, t_list **stackb);
 void	rra(t_list **stacka);
@@ -74,5 +76,17 @@ int		empty(t_list *stack);
 int		count(t_list *stacka);
 int		above_median(t_list *stack);
 void	move_nodes(t_list **stacka, t_list **stackb);
-void	sortAndCheckConditions(t_list **stackA);
-void  small_to_top(t_list **stacka);
+void	sorthree(t_list **stacka);
+void	small_to_top(t_list **stacka);
+void	median(t_list **stack);
+void  cheapest(t_list **stackb);
+void	indexing(t_list **stack);
+t_list	*most_cheapest(t_list *stackb);
+void	ra_p(t_list **stacka);
+void	rb_p(t_list **stackb);
+void	rra_p(t_list **stacka);
+void	rrb_p(t_list **stackb);
+t_list	*stackissorted(t_list **stack);
+void	check_all(t_list **stacka, t_list **stackb);
+void	easy_move_a(t_list **stacka, t_list *node);
+void	easy_move_b(t_list **stackb);

@@ -6,13 +6,11 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:38:15 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/17 13:10:47 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:50:01 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int		count(t_list *stacka);
 
 void	indexing(t_list **stack)
 {
@@ -26,7 +24,7 @@ void	indexing(t_list **stack)
 		(*stack)->index = i++;
 		*stack = (*stack)->next;
 	}
-	*stack = current; 
+	*stack = current;
 }
 
 void	median(t_list **stack)
@@ -38,7 +36,7 @@ void	median(t_list **stack)
 	current = *stack;
 	while (current)
 	{
-		current->above_median = (current->index <= size / 2);
+		current->above_median = (current->index < size / 2);
 		current = current->next;
 	}
 }
@@ -83,7 +81,16 @@ void	init_stack(t_list **stacka, t_list **stackb)
 	indexing(stackb);
 	median(stacka);
 	median(stackb);
-	cost(stacka);
 	cost(stackb);
+	cost(stacka);
 	target_check(stacka, stackb);
+	most_cheapest(*stackb);
 }
+
+// void	check_all(t_list **stacka, t_list **stackb)
+// {
+// 	// init_stack(stacka, stackb);
+
+// 	cheapest(*stackb);
+// 	move_nodes(stacka, stackb);
+// }

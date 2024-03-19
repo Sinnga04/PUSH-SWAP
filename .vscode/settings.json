@@ -11,6 +11,10 @@
     "vector": "c",
     "stdbool.h": "c",
     "libft.h": "c",
-    "iterator": "c"
+    "iterator": "c",
+    "__node_handle": "c",
+    "random": "c",
+    "algorithm": "c",
+    "functional": "c"
   }
 }

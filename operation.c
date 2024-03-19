@@ -6,104 +6,29 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:23:44 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/17 11:36:13 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/19 01:09:08 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// void largestmove(Stack *stackA, Stack *stackB)
+// t_list	*ft_lstnew(int content)
 // {
-//    int largest = findLargestNumber(stackA);
-//         if (stackA->top->data == largest )
-//             pb(stackA, stackB);
-//         else if (stackA->top->next->data == largest )
-//         {
-//             sa(stackA);
-//             pb(stackA, stackB);
-//         }
-//         else if (largest == stackA->top->next->next->data )
-//         {
-//             ra(stackA);
-//             ra(stackA);
-//             pb(stackA, stackB);
-//         }
-//         else if (largest == stackA->top->next->next->next->data)
-//         {
-//             ra(stackA);
-//             ra(stackA);
-//             ra(stackA);
-//             pb(stackA, stackB);
-//         }
-//         else if (largest == stackA->top->next->next->next->next
-//         ->data)
-//         {
-//             rra(stackA);
-//             pb(stackA, stackB);
-//         }
+// 	t_list	*newnode;
+
+// 	newnode = malloc (sizeof(t_list));
+// 	if (!newnode)
+// 		return (NULL);
+// 	if (!content)
+// 	{
+// 		newnode->content = 0;
+// 		newnode->next = NULL;
+// 		return (newnode);
+// 	}
+// 	newnode->content = content;
+// 	newnode->next = NULL;
+// 	return (newnode);
 // }
-
-// void secondlargestmove(Stack *stackA, Stack *stackB)
-// {
-//      int secondLargest = findLargestNumber(*stackA);
-//         if (stackA->top->data == secondLargest )
-//         {
-//             pb(stackA, stackB);
-//         }
-//         else if (stackA->top->next->data == secondLargest )
-//         {
-//             sa(stackA);
-//             pb(stackA, stackB);
-//         }
-//         else if (secondLargest == stackA->top->next->next->data )
-//         {
-//             ra(stackA);
-//             ra(stackA);
-//             pb(stackA, stackB);
-//         }
-//         else if (secondLargest == stackA->top->next->next->next->data)
-//         {
-//             ra(stackA);
-//             ra(stackA);
-//             ra(stackA);
-//             pb(stackA, stackB);
-//         }
-//         else if (secondLargest == stackA->top->next->next->next->next
-//         ->data)
-//         {
-//             rra(stackA);
-//             pb(stackA, stackB);
-//         }
-// }
-
-// void sortfivenumbers(Stack *stackA, Stack *stackB)
-// {
-
-//         largestmove(stackA, stackB);
-//         secondlargestmove(stackA, stackB);
-//         sortAndCheckConditions(stackA);
-//         pa(stackA, stackB);
-//         pa(stackA, stackB);
-// }
-
-
-t_list	*ft_lstnew(int content)
-{
-	t_list	*newnode;
-
-	newnode = malloc (sizeof(t_list));
-	if (!newnode)
-		return (NULL);
-	if (!content)
-	{
-		newnode->content = 0;
-		newnode->next = NULL;
-		return (newnode);
-	}
-	newnode->content = content;
-	newnode->next = NULL;
-	return (newnode);
-}
 
 void	ft_lstadd_back(t_list **stack, t_list *newnode)
 {
@@ -137,6 +62,29 @@ void	ft_free_all(char **s)
 	free (s);
 }
 
+// void	stack_init(t_list **stack, char **argv)
+// {
+// 	t_list	*newnode;
+// 	char	**num;
+// 	int		i;
+// 	int		j;
+
+// 	i = 1;
+// 	while (argv[i])
+// 	{
+// 		num = ft_split(argv[i], ' ');
+// 		j = 0;
+// 		while (num[j])
+// 		{
+// 			newnode = ft_lstnew(ft_atoi(argv[j]));
+// 			ft_lstadd_back(stack, newnode);
+// 			j++;
+// 		}
+// 		ft_free_all(num);
+// 		i++;
+// 	}
+// }
+
 void	stack_init(t_list **stack, char **argv)
 {
 	t_list	*newnode;
@@ -151,7 +99,7 @@ void	stack_init(t_list **stack, char **argv)
 		j = 0;
 		while (num[j])
 		{
-			newnode = ft_lstnew(ft_atoi(argv[j]));
+			newnode = createnode(ft_atoi(num[j]));
 			ft_lstadd_back(stack, newnode);
 			j++;
 		}
@@ -217,4 +165,46 @@ int ft_isduplicate(t_list *stack)
 		new = new->next;
 	}
 	return (0);
+}
+
+int main(int argc, char **argv) 
+{
+	(void)argc;
+	t_list *stacka = NULL;
+	t_list *stackb = NULL;
+	int stack_len;
+
+	if (ft_check_error1(argv))
+	{
+		printf("Error: Non-numeric character found in input.\n");
+		return 1;
+	}
+	
+		stack_init(&stacka, argv);
+		if (ft_isduplicate(stacka)) {
+		printf("Error duplicate\n");
+		return 1;
+	}
+	stack_len = count(stacka);
+	// printf("%d\n", stack_len);
+	// ft_print_stack(stacka);
+	if (stacksorted(stacka))
+		return (0);
+	// printf("not sorted\n");
+	while (stack_len-- > 3)
+	{
+		pb(&stacka, &stackb);
+	}
+	sorthree(&stacka);
+	// ft_print_stack(stacka);
+	while (stackb != NULL)
+		{
+			init_stack(&stacka, &stackb);
+			move_nodes(&stacka, &stackb);
+		}
+		indexing(&stacka);
+		// indexing(&stackb);
+		easy_move_a(&stacka, smallestnumber(stacka));
+
+	return 0;
 }

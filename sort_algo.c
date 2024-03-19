@@ -6,60 +6,76 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 15:34:25 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/17 12:12:54 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:56:51 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-// void sortAndCheckConditions(t_list *stacka)
-// {
-// 	int first = stacka->content;
-//     int second = stacka->next->content;
-//     int third = stacka->next->next->content;
-// 	printf("Okiushd\n");
-//     if (first > second && second < third && third > first)
-//     {
-//         printf("Perform rra\n");
-//         sa(&stacka);
-//         // rra(&stacka);
-//     }
-//     else if (first > second && first > third && second < third)
-//     {
-//         printf("Perform rra and sa\n");
-//         // sa(&stacka);
-//         ra(&stacka);
-//     }
-//     else if (third > second && third > first && second > first)
-//     {
-//         // printf("Perform sa and rra\n");
-//         // rra(&stacka);
-//         // sa(&stacka);
-// 		//it is alredy sorted
-// 		printf("oka\n");
-//     }
-//     else if (first < second && first < third && second > third)
-//     {
-//         printf("Perform ra\n");
-// 		sa(&stacka);
-//         ra(&stacka);
-//     }
-//     else if (first < second && first > third && second > third)
-//     {
-//         printf("Perform sa\n");
-//         sa(&stacka);
-// 		// rra(&stacka);
-//     }
-// }
 
-
-void sortAndCheckConditions(t_list **stacka)
+void	sorthree(t_list **stacka)
 {
-	t_list *big;
+	t_list	*big;
+
 	big = biggestnumber(*stacka);
 	if (*stacka == big)
-		ra(stacka);
+		ra_p(stacka);
 	else if ((*stacka)->next == big)
-		rra(stacka);
+		rra_p(stacka);
 	if ((*stacka)->content > (*stacka)->next->content)
 		sa(stacka);
+}
+
+void	small_to_top(t_list **stacka)
+{
+	t_list	*small;
+
+	small = smallestnumber(*stacka);
+	if (small->above_median)
+		while (*stacka != small)
+			ra_p(stacka);
+	else
+		while (*stacka != small)
+			rra_p(stacka);
+}
+
+void	rra(t_list **stacka)
+{
+	t_list	*current;
+	t_list	*last;
+
+	current = *stacka;
+	last = NULL;
+	if (*stacka == NULL || (*stacka)->next == NULL)
+		return ;
+	while (current->next != NULL)
+	{
+		last = current;
+		current = current->next;
+	}
+	last->next = NULL;
+	current->next = *stacka;
+	*stacka = current;
+	indexing(stacka);
+}
+
+void	pa(t_list **stacka, t_list **stackb)
+{
+	int	first;
+
+	first = pop(stackb);
+	push(stacka, first);
+	printf("pa\n");
+	indexing(stacka);
+	indexing(stackb);
+}
+
+void	pb(t_list **stacka, t_list **stackb)
+{
+	int	first;
+
+	first = pop(stacka);
+	push(stackb, first);
+	printf("pb\n");
+	indexing(stacka);
+	indexing(stackb);
 }
