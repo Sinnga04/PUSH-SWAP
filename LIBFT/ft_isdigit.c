@@ -6,14 +6,11 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:40:46 by kamsingh          #+#    #+#             */
-/*   Updated: 2023/10/18 20:44:26 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:06:14 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+	return ((c >= '0' && c <= '9') || c == '-');
 }

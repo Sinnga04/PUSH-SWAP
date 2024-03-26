@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:09:12 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/17 23:47:27 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:06:42 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,11 @@ int	ft_atoi(const char *str)
 	return (z);
 }
 
-int	ft_isdigit(int c)
+void	sortwo(t_list **stacka)
 {
-	return (c >= '0' && c <= '9');
-}
+	t_list	*big;
 
-int		count(t_list *stacka);
-
-int	above_median(t_list *stack)
-{
-	int	i;
-
-	i = count(stack) / 2;
-	return (i);
+	big = biggestnumber(*stacka);
+	if (*stacka == big)
+		ra_p(stacka);
 }

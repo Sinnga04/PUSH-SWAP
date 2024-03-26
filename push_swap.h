@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:46:54 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/19 00:53:02 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:59:23 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
-
 #include "LIBFT/libft.h"
-
+#include <ctype.h>
 typedef struct s_list
 {
 	int				content;
@@ -26,6 +25,7 @@ typedef struct s_list
 	int				cheapest;
 	int				above_median;
 	struct s_list	*next;
+	int				counter;
 }			t_list;
 
 typedef struct s_Stack
@@ -40,7 +40,7 @@ t_list	*biggestnumber(t_list *stackA);
 void	target_check(t_list **stackA, t_list **stackB);
 int		count(t_list *stack);
 int		easiest_move(t_list **stackB);
-int		pop(t_list **stack);
+t_list	*pop(t_list **stack);
 void	sa(t_list **stackA);
 void	indexing(t_list **stack);
 void	median(t_list **stack);
@@ -59,7 +59,7 @@ void	rrr(t_list	**stacka, t_list **stackb);
 void	rrb(t_list **stackb);
 void	pa(t_list **stacka, t_list **stackb);
 void	pb(t_list **stacka, t_list **stackb);
-int		stacksorted(t_list *stack);
+int		stacksorted(t_list **stacka);
 t_list	*ft_lstnew(int content);
 int		ft_isduplicate(t_list *stack);
 int		ft_check_error1(char **s);
@@ -79,9 +79,9 @@ void	move_nodes(t_list **stacka, t_list **stackb);
 void	sorthree(t_list **stacka);
 void	small_to_top(t_list **stacka);
 void	median(t_list **stack);
-void  cheapest(t_list **stackb);
+void	cheapest(t_list **stacka, t_list **stackb);
 void	indexing(t_list **stack);
-t_list	*most_cheapest(t_list *stackb);
+t_list	*most_cheapest(t_list *stacka, t_list *stackb);
 void	ra_p(t_list **stacka);
 void	rb_p(t_list **stackb);
 void	rra_p(t_list **stacka);
@@ -89,4 +89,12 @@ void	rrb_p(t_list **stackb);
 t_list	*stackissorted(t_list **stack);
 void	check_all(t_list **stacka, t_list **stackb);
 void	easy_move_a(t_list **stacka, t_list *node);
-void	easy_move_b(t_list **stackb);
+void	easy_move_b(t_list **stackb, t_list *small);
+int		ft_isdigits_str(const char *str);
+int		ft_check_error2(char **s);
+int		ft_check_error1(char **s);
+void	free_list(t_list *head);
+long	ft_atol(const char *str);
+void	sort(t_list **stacka, t_list **stackb);
+int		ft_error(void);
+void	sortwo(t_list **stacka);

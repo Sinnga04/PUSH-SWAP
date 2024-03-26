@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 15:34:25 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/18 21:56:51 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:01:27 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,54 @@ void	rra(t_list **stacka)
 
 void	pa(t_list **stacka, t_list **stackb)
 {
-	int	first;
+	t_list	*node;
 
-	first = pop(stackb);
-	push(stacka, first);
-	printf("pa\n");
+	node = *stackb;
+	if (*stackb == NULL)
+		return ;
+	*stackb = (*stackb)->next;
+	if (*stacka == NULL)
+	{
+		*stacka = node;
+		node->next = NULL;
+	}
+	else
+	{
+		node->next = *stacka;
+		*stacka = node;
+	}
 	indexing(stacka);
 	indexing(stackb);
+	median(stacka);
+	median(stackb);
+	cost(stackb);
+	cost(stacka);
+	printf("pa\n");
 }
 
 void	pb(t_list **stacka, t_list **stackb)
 {
-	int	first;
+	t_list	*node;
 
-	first = pop(stacka);
-	push(stackb, first);
-	printf("pb\n");
+	node = *stacka;
+	if (*stacka == NULL)
+		return ;
+	*stacka = (*stacka)->next;
+	if (*stackb == NULL)
+	{
+		*stackb = node;
+		node->next = NULL;
+	}
+	else
+	{
+		node->next = *stackb;
+		*stackb = node;
+	}
 	indexing(stacka);
 	indexing(stackb);
+	median(stacka);
+	median(stackb);
+	cost(stackb);
+	cost(stacka);
+	printf("pb\n");
 }

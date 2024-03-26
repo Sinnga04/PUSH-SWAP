@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:38:15 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/19 10:50:01 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:37:52 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	median(t_list **stack)
 	current = *stack;
 	while (current)
 	{
-		current->above_median = (current->index < size / 2);
+		current->above_median = (current->index <= size / 2);
 		current = current->next;
 	}
 }
@@ -65,12 +65,12 @@ void	cost(t_list **stack)
 	current = *stack;
 	while (current)
 	{
-		if (current->above_median)
+		if (!current->above_median)
 		{
-			current->cost = current->index;
-		}
-		else
 			current->cost = size - current->index;
+		}
+		else if (current->above_median)
+			current->cost = current->index;
 		current = current->next;
 	}
 }
@@ -84,13 +84,5 @@ void	init_stack(t_list **stacka, t_list **stackb)
 	cost(stackb);
 	cost(stacka);
 	target_check(stacka, stackb);
-	most_cheapest(*stackb);
+	most_cheapest(*stacka, *stackb);
 }
-
-// void	check_all(t_list **stacka, t_list **stackb)
-// {
-// 	// init_stack(stacka, stackb);
-
-// 	cheapest(*stackb);
-// 	move_nodes(stacka, stackb);
-// }

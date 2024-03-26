@@ -2,7 +2,7 @@ NAME    := push_swap
 CFLAGS  := -Wall -Wextra -Werror
 
  
-SRCS    :=  moves2.c operation.c parsing.c sort_algo.c sort_nodes.c stack.c targets.c algo.c moves.c 
+SRCS    :=  algo.c error.c main.c moves.c moves2.c sort_algo.c sort_nodes.c sort.c stack.c targets.c utils.c
 
 
 OBJS    := $(SRCS:%.c=%.o)

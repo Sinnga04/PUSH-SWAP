@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:54:57 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/18 22:11:07 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:13:12 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 void	sb(t_list **stackb)
 {
-	t_list	*top;
-	t_list	*temp;
+	t_list	*current;
 
-	top = *stackb;
-	if (top == NULL || top->next == NULL)
-		return ;
-	temp = top;
-	top = top->next;
-	top->next = temp;
+    if (*stackb == NULL || (*stackb)->next == NULL)
+        return ;
+    current = *stackb;
+	*stackb = current->next;
+	current->next = (*stackb)->next;
+	(*stackb)->next = current; 
 	printf("sb\n");
+	indexing(stackb);
 }
+
 
 void	sa(t_list **stacka)
 {
@@ -37,23 +38,19 @@ void	sa(t_list **stacka)
 	current->next = (*stacka)->next;
 	(*stacka)->next = current;
 	printf("sa\n");
+	indexing(stacka);
 }
 
 void	ra(t_list **stacka)
 {
 	t_list	*last;
-
 	if (*stacka == NULL || (*stacka)->next == NULL)
-	{
 		return ;
-	}
 	last = *stacka;
 	while (last->next != NULL)
-	{
 		last = last->next;
-	}
 	last->next = *stacka;
-	*stacka = (*stacka)->next;
+	*stacka = last->next->next;
 	last->next->next = NULL;
 	indexing(stacka);
 }
@@ -72,9 +69,10 @@ void	rb(t_list **stackb)
 		last = last->next;
 	}
 	last->next = *stackb;
-	*stackb = (*stackb)->next;
+	*stackb = last->next->next;
 	last->next->next = NULL;
 	indexing(stackb);
+
 }
 
 void	rrb(t_list **stackb)
@@ -95,4 +93,5 @@ void	rrb(t_list **stackb)
 	current->next = *stackb;
 	*stackb = current;
 	indexing(stackb);
+
 }
