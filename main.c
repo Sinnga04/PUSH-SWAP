@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 18:22:25 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/26 14:55:08 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:46:20 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_isdigits_str(const char *str)
 	i = 0;
 	if (str == NULL || *str == '\0')
 	{
-		printf("Error\n");
+		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
 	while (str[i] == ' ' || str[i] == '\t')

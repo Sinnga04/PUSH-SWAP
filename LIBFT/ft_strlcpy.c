@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 20:50:52 by kamsingh          #+#    #+#             */
-/*   Updated: 2023/10/18 20:49:12 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:48:57 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 
 {
-	size_t	len;
+	// size_t	len;
 	size_t	i;
 
-	len = 0;
+	// len = 0;
 	i = 0;
 	while (i + 1 < dstsize && src[i] != 0)
 	{

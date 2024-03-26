@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:54:57 by kamsingh          #+#    #+#             */
-/*   Updated: 2024/03/26 14:13:12 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:47:04 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void	sb(t_list **stackb)
 	*stackb = current->next;
 	current->next = (*stackb)->next;
 	(*stackb)->next = current; 
-	printf("sb\n");
+	write(1, "sb\n", 3);
 	indexing(stackb);
 }
-
 
 void	sa(t_list **stacka)
 {
@@ -37,7 +36,7 @@ void	sa(t_list **stacka)
 	*stacka = current->next;
 	current->next = (*stacka)->next;
 	(*stacka)->next = current;
-	printf("sa\n");
+	write(1, "sa\n", 3);
 	indexing(stacka);
 }
 

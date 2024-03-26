@@ -6,7 +6,7 @@
 /*   By: kamsingh <kamsingh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 09:55:39 by kamsingh          #+#    #+#             */
-/*   Updated: 2023/10/18 19:17:01 by kamsingh         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:45:52 by kamsingh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,3 @@ char	**ft_split(char const *s, char c)
 	str[num] = 0;
 	return (str);
 }
-
-// int main() {
-//     char str[] = "Hello World! This is a test.";
-//     char delimiter = ' ';
-//     char** words = ft_split(str, delimiter);
-
-//     if (words != NULL) {
-//         for (int i = 0; words[i] != NULL; i++) {
-//             printf("Word %d: %s\n", i + 1, words[i]);
-//         }
-//     }
-
-//     return 0;
-// }
